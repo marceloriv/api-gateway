@@ -22,12 +22,14 @@ public class SecurityConfig {
      * @return cadena de filtros de seguridad configurada
      */
     @Bean
+    // Configura la seguridad HTTP para el API Gateway, permitiendo acceso público a ciertas rutas, 
+    //  requiriendo autenticación para el resto
     public SecurityWebFilterChain springSecurityFilterChain(ServerHttpSecurity http) {
         return http
                 .csrf(ServerHttpSecurity.CsrfSpec::disable)
                 .httpBasic(ServerHttpSecurity.HttpBasicSpec::disable)
                 .formLogin(ServerHttpSecurity.FormLoginSpec::disable)
-                .authorizeExchange(exchange -> exchange
+                .authorizeExchange(exchange -> exchange // Permite acceso público a rutas específicas, el resto requiere autenticación
                         .pathMatchers("/actuator/health", "/actuator/info").permitAll()
                         // ── Autenticación ──
                         .pathMatchers("/auth/**").permitAll()
