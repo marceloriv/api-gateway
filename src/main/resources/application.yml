@@ -141,6 +141,24 @@ resilience4j:
       mensajeria-service:
         baseConfig: default
 
+  timelimiter:
+    configs:
+      default:
+        timeoutDuration: 5s
+    instances:
+      auth-service:
+        baseConfig: default
+      carrito-service:
+        baseConfig: default
+      usuarios-service:
+        baseConfig: default
+      eventos-service:
+        baseConfig: default
+      donaciones-service:
+        baseConfig: default
+      mensajeria-service:
+        baseConfig: default
+
 # Logging
 logging:
   level:
