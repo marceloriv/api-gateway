@@ -104,7 +104,7 @@ spring:
 
 # JWT Configuration
 jwt:
-  secret: ${JWT_SECRET:ticketti-secret-key-2024-for-jwt-signing-and-verification-only}
+  secret: ${JWT_SECRET:clave-secreta-super-larga-de-minimo-32-caracteres}
   issuer: ${JWT_ISSUER:}
   audience: ${JWT_AUDIENCE:}
 
