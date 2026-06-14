@@ -34,7 +34,7 @@ public class SecurityConfig {
                         // ── Autenticación ──
                         .pathMatchers("/auth/**").permitAll()
                         .pathMatchers("/api/v1/usuarios").permitAll()                          // Registro
-                        .pathMatchers("/api/v1/usuarios/validar-credenciales").permitAll()     // Login BFF
+                        .pathMatchers("/api/v1/usuarios/**").permitAll()                       // Subrutas de usuarios (BFF valida JWT)
                         // ── Eventos ──
                         .pathMatchers("/api/v1/eventos").permitAll()
                         .pathMatchers("/api/v1/eventos/**").permitAll()
