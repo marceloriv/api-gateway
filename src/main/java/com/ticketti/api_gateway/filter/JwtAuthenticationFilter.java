@@ -100,6 +100,7 @@ public class JwtAuthenticationFilter implements GlobalFilter, Ordered {
         "/api/v1/eventos",                        // Listar eventos
         "/api/v1/eventos/**",                     // Detalle de evento
         "/api/v1/Eventos/**",                     // Compatibilidad case
+        "/api/v0/Eventos/**",                     // Mapeo interno de ms-eventos
         // ═ Carrito ═
         "/api/v1/Carrito/**",                     // Carrito (case original)
         "/api/v1/carrito/**",                     // Carrito (lowercase)
