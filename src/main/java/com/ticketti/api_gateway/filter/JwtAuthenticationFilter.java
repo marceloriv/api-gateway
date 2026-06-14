@@ -96,6 +96,7 @@ public class JwtAuthenticationFilter implements GlobalFilter, Ordered {
         "/auth/**",
         "/api/v1/usuarios/validar-credenciales",  // Login interno BFF → API Gateway
         "/api/v1/usuarios",                       // Registro de usuario
+        "/api/v1/usuarios/**",                    // Subrutas de usuarios (BFF valida JWT)
         // ═ Eventos ═
         "/api/v1/eventos",                        // Listar eventos
         "/api/v1/eventos/**",                     // Detalle de evento
