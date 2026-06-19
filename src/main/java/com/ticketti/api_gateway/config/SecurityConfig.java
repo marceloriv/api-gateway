@@ -22,7 +22,7 @@ public class SecurityConfig {
      * @return cadena de filtros de seguridad configurada
      */
     @Bean
-    // Configura la seguridad HTTP para el API Gateway, permitiendo acceso público a ciertas rutas, 
+    // Configura la seguridad HTTP para el API Gateway, permitiendo acceso público a ciertas rutas,
     //  requiriendo autenticación para el resto
     public SecurityWebFilterChain springSecurityFilterChain(ServerHttpSecurity http) {
         return http
@@ -34,20 +34,14 @@ public class SecurityConfig {
                         // ── Autenticación ──
                         .pathMatchers("/auth/**").permitAll()
                         .pathMatchers("/api/v1/usuarios").permitAll()                          // Registro
-                        .pathMatchers("/api/v1/usuarios/**").permitAll()                       // Subrutas de usuarios (BFF valida JWT)
-                        // ── Eventos ──
+                        // ── Eventos públicos ──
                         .pathMatchers("/api/v1/eventos").permitAll()
                         .pathMatchers("/api/v1/eventos/**").permitAll()
                         .pathMatchers("/api/v1/Eventos/**").permitAll()
-                        // ── Carrito ──
-                        .pathMatchers("/api/v1/Carrito/**").permitAll()
-                        .pathMatchers("/api/v1/carrito/**").permitAll()
                         // ── Causas y Organizaciones públicas ──
                         .pathMatchers("/api/v1/causas/activas").permitAll()
                         .pathMatchers("/api/v1/organizaciones/activas").permitAll()
-                        // ── Notificaciones ──
-                        .pathMatchers("/api/v1/notificaciones/historial/**").permitAll()
-                        .anyExchange().authenticated()
+                        .anyExchange().authenticated())
                 )
                 .build();
     }
