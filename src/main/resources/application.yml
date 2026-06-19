@@ -70,7 +70,30 @@ spring:
                     fallbackUri: forward:/fallback/eventos
 
             # 5. Ruta hacia MS-Donaciones (protegido)
-            - id: ms-donaciones
+            # 5a. Ruta hacia MS-Donaciones - organizaciones
+            - id: ms-donaciones-organizaciones
+              uri: lb://ms-donaciones
+              predicates:
+                - Path=/api/v1/organizaciones/**
+              filters:
+                - name: CircuitBreaker
+                  args:
+                      name: donaciones-service
+                      fallbackUri: forward:/fallback/donaciones
+
+            # 5b. Ruta hacia MS-Donaciones - causas sociales
+            - id: ms-donaciones-causas
+              uri: lb://ms-donaciones
+              predicates:
+                - Path=/api/v1/causas/**
+              filters:
+                - name: CircuitBreaker
+                  args:
+                    name: donaciones-service
+                    fallbackUri: forward:/fallback/donaciones
+
+            # 5c. Ruta hacia MS-Donaciones - donaciones (historial)
+            - id: ms-donaciones-donaciones
               uri: lb://ms-donaciones
               predicates:
                 - Path=/api/v1/donaciones/**

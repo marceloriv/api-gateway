@@ -41,9 +41,15 @@ public class SecurityConfig {
                         // ── Carrito público ──
                         .pathMatchers("/api/v1/Carrito/**").permitAll()
                         .pathMatchers("/api/v1/carrito/**").permitAll()
-                        // ── Causas y Organizaciones públicas ──
-                        .pathMatchers("/api/v1/causas/activas").permitAll()
-                        .pathMatchers("/api/v1/organizaciones/activas").permitAll()
+                        // ── Donaciones (ms-donaciones) ──
+                        .pathMatchers("/api/v1/organizaciones").permitAll()
+                        .pathMatchers("/api/v1/organizaciones/**").permitAll()
+                        .pathMatchers("/api/v1/causas").permitAll()
+                        .pathMatchers("/api/v1/causas/**").permitAll()
+                        .pathMatchers("/api/v1/donaciones/**").permitAll()
+                        // ── Mensajería (ms-mensajeria) ──
+                        .pathMatchers("/api/v1/notificaciones/**").permitAll()
+                        .pathMatchers("/api/v1/mensajeria/**").permitAll()
                         .anyExchange().authenticated()
                 )
                 .build();
