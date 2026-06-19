@@ -22,7 +22,7 @@ public class SecurityConfig {
      * @return cadena de filtros de seguridad configurada
      */
     @Bean
-    // Configura la seguridad HTTP para el API Gateway, permitiendo acceso público a ciertas rutas, 
+    // Configura la seguridad HTTP para el API Gateway, permitiendo acceso público a ciertas rutas,
     //  requiriendo autenticación para el resto
     public SecurityWebFilterChain springSecurityFilterChain(ServerHttpSecurity http) {
         return http
@@ -42,11 +42,15 @@ public class SecurityConfig {
                         // ── Carrito ──
                         .pathMatchers("/api/v1/Carrito/**").permitAll()
                         .pathMatchers("/api/v1/carrito/**").permitAll()
-                        // ── Causas y Organizaciones públicas ──
-                        .pathMatchers("/api/v1/causas/activas").permitAll()
-                        .pathMatchers("/api/v1/organizaciones/activas").permitAll()
-                        // ── Notificaciones ──
-                        .pathMatchers("/api/v1/notificaciones/historial/**").permitAll()
+                        // ── Donaciones (ms-donaciones) ──
+                        .pathMatchers("/api/v1/organizaciones").permitAll()
+                        .pathMatchers("/api/v1/organizaciones/**").permitAll()
+                        .pathMatchers("/api/v1/causas").permitAll()
+                        .pathMatchers("/api/v1/causas/**").permitAll()
+                        .pathMatchers("/api/v1/donaciones/**").permitAll()
+                        // ── Mensajería (ms-mensajeria) ──
+                        .pathMatchers("/api/v1/notificaciones/**").permitAll()
+                        .pathMatchers("/api/v1/mensajeria/**").permitAll()
                         .anyExchange().authenticated()
                 )
                 .build();
