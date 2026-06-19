@@ -38,6 +38,9 @@ public class SecurityConfig {
                         .pathMatchers("/api/v1/eventos").permitAll()
                         .pathMatchers("/api/v1/eventos/**").permitAll()
                         .pathMatchers("/api/v1/Eventos/**").permitAll()
+                        // ── Carrito público ──
+                        .pathMatchers("/api/v1/Carrito/**").permitAll()
+                        .pathMatchers("/api/v1/carrito/**").permitAll()
                         // ── Causas y Organizaciones públicas ──
                         .pathMatchers("/api/v1/causas/activas").permitAll()
                         .pathMatchers("/api/v1/organizaciones/activas").permitAll()
