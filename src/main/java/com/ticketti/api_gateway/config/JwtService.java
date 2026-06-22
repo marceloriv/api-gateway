@@ -168,20 +168,31 @@ public class JwtService {
     }
 
     /**
-     * Extrae los roles (claims "roles") del token JWT.
+     * Extrae el rol (claim "rol") del token JWT.
+     * Compatible con tokens emitidos por el BFF que usan un solo rol por usuario.
      *
      * @param token token JWT válido
-     * @return conjunto de roles incluidos en el token
+     * @return conjunto con el rol incluido en el token, o null si no existe
      */
-    @SuppressWarnings("unchecked")
-    public Set<String> extractRoles(String token) {
+    public Set<String> extractRol(String token) {
         Claims claims = extractAllClaims(token);
-        Object rolesObj = claims.get("roles");
-        if (rolesObj instanceof Set) {
-            return (Set<String>) rolesObj;
-        } else if (rolesObj instanceof java.util.List) {
-            return new java.util.HashSet<>((java.util.List<String>) rolesObj);
+        String rol = claims.get("rol", String.class);
+        if (rol != null && !rol.isBlank()) {
+            return Set.of(rol.trim().toUpperCase());
         }
+        return null;
+    }
+
+    /**
+     * Extrae el ID de usuario (claim "usuarioId") del token JWT.
+     *
+     * @param token token JWT válido
+     * @return ID de usuario numérico, o null si no existe
+     */
+    public Long extractUsuarioId(String token) {
+        Claims claims = extractAllClaims(token);
+        Object id = claims.get("usuarioId");
+        if (id instanceof Number n) return n.longValue();
         return null;
     }
 }

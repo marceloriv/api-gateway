@@ -6,11 +6,12 @@ import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.NONE,
-	properties = {
+		properties = {
 		"spring.autoconfigure.exclude=org.springframework.cloud.gateway.config.GatewayAutoConfiguration,org.springframework.cloud.gateway.discovery.GatewayDiscoveryClientAutoConfiguration,org.springframework.cloud.gateway.config.GatewayMetricsAutoConfiguration,org.springframework.cloud.gateway.config.GatewayReactiveLoadBalancerClientAutoConfiguration,org.springframework.cloud.gateway.config.GatewayResilience4JCircuitBreakerAutoConfiguration",
 		"spring.cloud.discovery.enabled=false",
 		"spring.cloud.config.enabled=false",
-		"eureka.client.enabled=false"
+		"eureka.client.enabled=false",
+		"jwt.secret=test-secret-for-testing-minimum-32-characters"
 	})
 class ApiGatewayApplicationTests {
 
