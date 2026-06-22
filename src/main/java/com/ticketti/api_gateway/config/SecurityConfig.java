@@ -50,9 +50,6 @@ public class SecurityConfig {
                         .pathMatchers("/api/v1/eventos/listarEventos").permitAll()
                         .pathMatchers("/api/v1/eventos/buscarEvento/**").permitAll()
                         .pathMatchers("/api/v1/Eventos/**").permitAll()
-                        // ═ Carrito — solo creación guest ═
-                        .pathMatchers("/api/v1/Carrito/crear").permitAll()
-                        .pathMatchers("/api/v1/carrito/crear").permitAll()
                         // ═ Donaciones / Causas — solo lectura pública ═
                         .pathMatchers("/api/v1/causas/activas").permitAll()
                         .pathMatchers("/api/v1/organizaciones").permitAll()
