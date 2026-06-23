@@ -5,6 +5,7 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.health.contributor.Health;
 import org.springframework.boot.health.contributor.HealthIndicator;
 import org.springframework.cloud.client.discovery.DiscoveryClient;
@@ -17,14 +18,9 @@ import org.springframework.stereotype.Component;
 @Component
 public class GatewayHealthIndicator implements HealthIndicator {
 
-    // DiscoveryClient puede no estar presente en entornos de test aislados,
-    // por lo que no lo forzamos como dependencia obligatoria.
-    private DiscoveryClient discoveryClient;
+    private final DiscoveryClient discoveryClient;
 
-    public GatewayHealthIndicator() {
-        // constructor por defecto para when DiscoveryClient is not available
-    }
-
+    @Autowired(required = false)
     public GatewayHealthIndicator(DiscoveryClient discoveryClient) {
         this.discoveryClient = discoveryClient;
     }

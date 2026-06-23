@@ -44,7 +44,8 @@ class JwtServiceTest {
                 .subject("testuser@example.com")
                 .issuedAt(new Date())
                 .expiration(new Date(System.currentTimeMillis() + 3600000))
-                .claim("roles", Set.of("USER", "ADMIN"))
+                .claim("rol", "ADMINPLATAFORMA")
+                .claim("usuarioId", 42)
                 .signWith(key)
                 .compact();
 
@@ -52,7 +53,7 @@ class JwtServiceTest {
                 .subject("testuser@example.com")
                 .issuedAt(new Date(System.currentTimeMillis() - 7200000))
                 .expiration(new Date(System.currentTimeMillis() - 3600000))
-                .claim("roles", Set.of("USER"))
+                .claim("rol", "CLIENTE")
                 .signWith(key)
                 .compact();
 
@@ -103,10 +104,9 @@ class JwtServiceTest {
 
     @Test
     void extraerRoles_TokenValido_RetornaRoles() {
-        Set<String> roles = jwtService.extractRoles(validToken);
+        Set<String> roles = jwtService.extractRol(validToken);
         assertNotNull(roles);
-        assertTrue(roles.contains("USER"));
-        assertTrue(roles.contains("ADMIN"));
+        assertTrue(roles.contains("ADMINPLATAFORMA"));
     }
 
     @Test
@@ -121,7 +121,14 @@ class JwtServiceTest {
                 .signWith(key)
                 .compact();
 
-        Set<String> roles = jwtService.extractRoles(tokenWithoutRoles);
+        Set<String> roles = jwtService.extractRol(tokenWithoutRoles);
         assertNull(roles);
+    }
+
+    @Test
+    void extraerUsuarioId_TokenValido_RetornaId() {
+        Long id = jwtService.extractUsuarioId(validToken);
+        assertNotNull(id);
+        assertEquals(42L, id);
     }
 }

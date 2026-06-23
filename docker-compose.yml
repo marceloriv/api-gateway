@@ -3,22 +3,18 @@ services:
     build: .
     container_name: api-gateway
     restart: unless-stopped
-    depends_on:
-      config-server:
-        condition: service_healthy
-      discovery-server:
-        condition: service_healthy
     networks:
       - ticketti-network
     environment:
       - SERVER_PORT=8222
       - SPRING_CONFIG_IMPORT=${SPRING_CONFIG_IMPORT:-optional:configserver:http://config-server:8888}
-      - JWT_SECRET=${JWT_SECRET:-clave-secreta-super-larga-de-minimo-32-caracteres}
-      - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=http://discovery-server:8761/eureka/
+      - JWT_SECRET=${JWT_SECRET}
+      - EUREKA_CLIENT_SERVICEURL_DEFAULTZONE=${EUREKA_CLIENT_SERVICEURL_DEFAULTZONE:-http://discovery-server:8761/eureka/}
     ports:
       - "8222:8222"
     healthcheck:
-      test: ["CMD-SHELL", "curl -f http://localhost:8222/actuator/health || exit 1"]
+      test:
+        ["CMD-SHELL", "curl -f http://localhost:8222/actuator/health || exit 1"]
       interval: 15s
       timeout: 10s
       retries: 5
@@ -27,3 +23,4 @@ services:
 networks:
   ticketti-network:
     external: true
+    name: ticketti-network
