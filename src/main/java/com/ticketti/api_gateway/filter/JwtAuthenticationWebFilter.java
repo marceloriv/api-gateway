@@ -67,7 +67,7 @@ public class JwtAuthenticationWebFilter implements WebFilter {
         Set<String> roles = jwtService.extractRol(token);
         Long usuarioId = jwtService.extractUsuarioId(token);
 
-        log.debug("Usuario autenticado: {}, roles: {}, usuarioId: {}", username, roles, usuarioId);
+        log.info(">>>>> JWT - Usuario: {}, roles: {}, usuarioId: {}, path: {}", username, roles, usuarioId, path);
 
         if (roles == null || roles.isEmpty()) {
             log.warn("Token sin roles para la ruta: {}, requestId={}", path, requestId);

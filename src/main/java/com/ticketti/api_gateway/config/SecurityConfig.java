@@ -2,6 +2,7 @@ package com.ticketti.api_gateway.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.web.reactive.EnableWebFluxSecurity;
 import org.springframework.security.config.web.server.SecurityWebFiltersOrder;
 import org.springframework.security.config.web.server.ServerHttpSecurity;
@@ -46,14 +47,14 @@ public class SecurityConfig {
                         .pathMatchers("/api/v1/usuarios").permitAll()
                         .pathMatchers("/api/v1/usuarios/validar-credenciales").permitAll()
                         // ═ Eventos — solo lectura pública ═
-                        .pathMatchers("/api/v1/eventos").permitAll()
-                        .pathMatchers("/api/v1/eventos/listarEventos").permitAll()
-                        .pathMatchers("/api/v1/eventos/buscarEvento/**").permitAll()
-                        .pathMatchers("/api/v1/Eventos/**").permitAll()
+                        .pathMatchers(HttpMethod.GET, "/api/v1/eventos/**").permitAll()
+                        .pathMatchers(HttpMethod.GET, "/api/v1/Eventos/**").permitAll()
                         // ═ Donaciones / Causas — solo lectura pública ═
                         .pathMatchers("/api/v1/causas/activas").permitAll()
                         .pathMatchers("/api/v1/organizaciones").permitAll()
                         .pathMatchers("/api/v1/organizaciones/todas").permitAll()
+                        .pathMatchers("/api/v1/Carrito/**").permitAll()
+                        .pathMatchers("/api/v1/carrito/**").permitAll()
                         // ═ Todo lo demás requiere autenticación ═
                         .anyExchange().authenticated()
                 )
