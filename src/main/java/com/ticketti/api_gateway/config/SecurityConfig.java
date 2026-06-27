@@ -55,6 +55,7 @@ public class SecurityConfig {
                         .pathMatchers("/api/v1/organizaciones/todas").permitAll()
                         .pathMatchers("/api/v1/Carrito/**").permitAll()
                         .pathMatchers("/api/v1/carrito/**").permitAll()
+                        .pathMatchers("/api/v1/notificaciones/contacto").permitAll()
                         // ═ Todo lo demás requiere autenticación ═
                         .anyExchange().authenticated()
                 )
