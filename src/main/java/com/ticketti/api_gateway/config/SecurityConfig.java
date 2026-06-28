@@ -42,6 +42,7 @@ public class SecurityConfig {
                 .addFilterBefore(jwtWebFilter, SecurityWebFiltersOrder.AUTHORIZATION)
                 .authorizeExchange(exchange -> exchange
                         .pathMatchers("/actuator/health", "/actuator/info").permitAll()
+                        .pathMatchers("/fallback/**").permitAll()
                         // ═ Autenticación ═
                         .pathMatchers("/auth/**").permitAll()
                         .pathMatchers("/api/v1/usuarios").permitAll()
